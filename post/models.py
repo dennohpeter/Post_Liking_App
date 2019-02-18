@@ -5,7 +5,12 @@ class Post(models.Model):
     post_text = models.TextField()
 
     def __str__(self):
-        return self.user
+        return self.post_text
+
+    def __str__(self):
+        return self.post_heading
+
+
 
 class Like(models.Model):
-    post = models.ForeignKey(Post, on_delete="")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)

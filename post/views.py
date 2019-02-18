@@ -4,7 +4,7 @@ from django.http import  HttpResponse
 
 def index(request):
     posts = Post.objects.all() # Getting all posts frm database
-    return render(request, "index.html", {'posts': posts})
+    return render(request, 'index.html', {"posts": posts })
 
 
 def likePost(request):
