@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Like Post App</title>
+  </head>
+  <body>
+    <p id="message"></p>
+    {% for eachpost in posts %}
+    <h3> {{ forloop.counter }}) {{ eachpost.post_heading}}</h3>
+    <p>{{ eachpost.post_text }}</p>
+    <a href="#" class="likebutton" id="like{{ eachpost.id }}" data-catid="{{ eachpost.id }}">Like</a>
+    {% endfor %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(".likebutton").on('click', function () {
+        var catid;
+        catid = $(this).attr("data-catid");
+        $.ajax({
+          type: 'GET',
+          url: '/likepost',
+          data: {
+              "post_id": catid,
+          },
+          success(data){
+            $('#like' + catid).remove();
+            $('#message').text(data);
+          }
+        })
+      });
+    </script>
+  </body>
+</html>
